@@ -26,7 +26,7 @@ class CoursesPage extends React.Component {
   }
 
   onClickSave(){
-    this.props.createCourse(this.state.course);
+    this.props.actions.createCourse(this.state.course);
   }
 
 courseRow(course, index) {
@@ -55,7 +55,7 @@ courseRow(course, index) {
 
 CoursesPage.propTypes = {
   courses: PropTypes.array.isRequired,
-  createCourse: PropTypes.func.isRequired
+  actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps){
