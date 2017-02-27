@@ -5,10 +5,12 @@ import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import routes from './routes';
+import {loadCourses} from './actions/courseActions';
 import './styles/styles.css'; //Webpack can import CSS files too!
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const store = configureStore();
+store.dispatch(loadCourses()); //to load courses on the startup via thunk
 
 //provider is wrapping our application so it can be connected to redux store
 render(
