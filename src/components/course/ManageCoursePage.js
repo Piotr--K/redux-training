@@ -15,6 +15,7 @@ class ManageCoursePage extends React.Component {
 
     //binding to make sure the this context is properly set
     this.updateCourseState = this.updateCourseState.bind(this);
+    this.saveCourse = this.saveCourse.bind(this);
   }
 
 //handler for all input fields, allowing type in
@@ -25,12 +26,19 @@ class ManageCoursePage extends React.Component {
     return this.setState({course: course});
   }
 
+  saveCourse(event) {
+    event.preventDefault();
+    this.props.actions.saveCourse(this.state.course);
+    this.context.router.push('/courses');
+  }
+
   render(){
     return (
       <div>
         <CourseForm
           allAuthors={this.props.authors}
           onChange={this.updateCourseState}
+          onSave={this.saveCourse}
           course={this.state.course}
           errors={this.state.errors}
           />
@@ -41,7 +49,13 @@ class ManageCoursePage extends React.Component {
 
 ManageCoursePage.propTypes = {
   course: PropTypes.object.isRequired,
-  authors: PropTypes.array.isRequired
+  authors: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+};
+
+//Pull in the React Router context so router is available on this.context.router
+ManageCoursePage.contextTypes = {
+  router: PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
