@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import courseApi from '../api/mockCourseApi';
-import {beginAjaxCall} from './ajaxStatusActions';
+import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions'; //named imports
 
 //action creators
 
@@ -42,6 +42,7 @@ export function saveCourse(course) {
       course.id ? dispatch(updateCourseSuccess(savedCourse)) :
         dispatch(createCourseSuccess(savedCourse));
       }).catch(error => {
+        dispatch(ajaxCallError(error));
         throw(error);
       });
     };
